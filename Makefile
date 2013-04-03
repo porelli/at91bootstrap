@@ -4,6 +4,8 @@
 # Then, `make menuconfig' if needed
 #
 
+CROSS_COMPILE=arm-linux-gnueabi-
+
 TOPDIR=$(shell pwd)
 
 CONFIG_CONFIG_IN=Config.in
