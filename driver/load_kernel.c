@@ -320,7 +320,8 @@ int load_kernel(struct image_info *image)
 		if (ret)
 			return ret;
 
-		mach_type = 0xffffffff;
+		mach_type = MACH_TYPE;
+		//mach_type = 0xffffffff;
 		r2 = (unsigned int)image->of_dest;
 	} else {
 		setup_boot_params();
