@@ -143,9 +143,9 @@ static void ddramc_init(void)
 	/* Chip select 1 is for DDR2/SDRAM */
 	csa = readl(AT91C_BASE_CCFG + CCFG_EBICSA);
 	csa |= AT91C_EBI_CS1A_SDRAMC;
-	csa &= ~AT91C_EBI_DBPUC;
+	/*csa &= ~AT91C_EBI_DBPUC;
 	csa |= AT91C_EBI_DBPDC;
-	csa |= AT91C_EBI_DRV_HD;
+	csa |= AT91C_EBI_DRV_HD;*/
 
 	writel(csa, AT91C_BASE_CCFG + CCFG_EBICSA);
 
