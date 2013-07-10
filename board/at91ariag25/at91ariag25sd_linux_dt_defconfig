@@ -1,6 +1,5 @@
 #
-# Automatically generated make config: don't edit
-# Wed Apr  3 12:18:34 2013
+# Default .config file for Aria G25
 #
 HAVE_DOT_CONFIG=y
 CONFIG_BOARDNAME="at91ariag25"
@@ -43,7 +42,7 @@ CONFIG_BUS_SPEED_133MHZ=y
 ALLOW_PIO3=y
 CONFIG_HAS_PIO3=y
 CPU_HAS_PMECC=y
-CONFIG_LOAD_ONE_WIRE=y
+# CONFIG_LOAD_ONE_WIRE is not set
 # CONFIG_MMC_SUPPORT is not set
 
 #
@@ -61,8 +60,8 @@ ALLOW_HSMCI=y
 # ALLOW_SDRAM_16BIT is not set
 # CONFIG_RAM_32MB is not set
 # CONFIG_RAM_64MB is not set
-CONFIG_RAM_128MB=y
-# CONFIG_RAM_256MB is not set
+# CONFIG_RAM_128MB is not set
+CONFIG_RAM_256MB=y
 # CONFIG_RAM_512MB is not set
 # CONFIG_DATAFLASH is not set
 # CONFIG_FLASH is not set
@@ -80,6 +79,7 @@ CONFIG_BOOTSTRAP_MAXSIZE="23000"
 CONFIG_PROJECT="sdcard"
 # CONFIG_LOAD_UBOOT is not set
 CONFIG_LOAD_LINUX=y
+# CONFIG_LOAD_ANDROID is not set
 # CONFIG_LOAD_1MB is not set
 # CONFIG_LOAD_4MB is not set
 # CONFIG_LOAD_64KB is not set
@@ -89,7 +89,10 @@ CONFIG_LOAD_LINUX=y
 #
 CONFIG_OS_MEM_BANK="0x20000000"
 CONFIG_OS_MEM_SIZE="0x8000000"
-CONFIG_LINUX_KERNEL_ARG_STRING="mem=128M console=ttyS0,115200 root=/dev/mmcblk0p2 rootdelay=2"
+#Use the following line for Aria G25 with 128MByte of RAM
+#CONFIG_LINUX_KERNEL_ARG_STRING="mem=128M console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootdelay=1"
+#Use the following line for Aria G25 with 256MByte  of RAM
+CONFIG_LINUX_KERNEL_ARG_STRING="mem=256M console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootdelay=1"
 CONFIG_OS_IMAGE_NAME="image.bin"
 CONFIG_JUMP_ADDR="0x22000000"
 CONFIG_OF_LIBFDT=y
