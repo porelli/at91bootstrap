@@ -70,6 +70,20 @@ static void initialize_dbgu(void)
 	dbgu_init(BAUDRATE(MASTER_CLOCK, BAUD_RATE));
 }
 
+// addressing RTC lockup at reboot and correct working of wakeup function to be able to restart the board
+// (needs to short SHDN with EN5V)  29 08 2013
+#ifndef RTC_IDR
+#define RTC_IDR 0x24
+#endif
+
+static void initialize_rtc(void)
+{
+	/* disable all RTC interrupts, just in case */
+	writel(0xffffffff, (RTC_IDR + AT91C_BASE_RTC));
+	writel(0xfffffe14, 0x20003); // to enable raise of SHDN line when rtc wakes up to correct start the board again
+}
+// end 29 08 2013
+
 #ifdef CONFIG_DDR2
 /* Using the Micron MT47H64M16HR-3 */
 static void ddramc_reg_config(struct ddramc_register *ddramc_config)
@@ -194,6 +208,12 @@ void hw_init(void)
 #ifdef CONFIG_SCLK
 	slowclk_enable_osc32();
 #endif
+
+// addressing RTC lockup at reboot and correct working of wakeup function to be able to restart the board
+// (needs to short SHDN with EN5V)  29 08 2013
+	/* Initialize realtime clock (RTC) */
+	initialize_rtc();
+// end 29 08 2013
 
 	/* Initialize dbgu */
 	initialize_dbgu();
