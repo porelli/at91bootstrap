@@ -21,7 +21,7 @@ BINDIR:=$(TOPDIR)/binaries
 
 DATE := $(shell date)
 VERSION := 3.5.3
-REVISION :=
+REVISION := Acme V1
 
 noconfig_targets:= menuconfig defconfig $(CONFIG) oldconfig
 
