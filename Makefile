@@ -20,7 +20,7 @@ endif
 BINDIR:=$(TOPDIR)/binaries
 
 DATE := $(shell date)
-VERSION := 3.5.3-acme-1.0
+VERSION := 3.5.3-acme-1.1
 REVISION := 
 
 noconfig_targets:= menuconfig defconfig $(CONFIG) oldconfig
