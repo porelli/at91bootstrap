@@ -279,33 +279,5 @@ int ddram_initialize(unsigned int base_address,
 	 *  wait for end of calibration
 	 */
 	udelay(10);
-// ModCE
-#define CONFIG_RAM_SELF_REFRESH
-//#define CONFIG_RAM_SELF_REFRESH_DELAY_64
-#define CONFIG_RAM_SELF_REFRESH_DELAY_128
-//#define CONFIG_RAM_SELF_REFRESH_DELAY_EXPERIMENTAL
-    cr = 0;
-#ifdef CONFIG_RAM_SELF_REFRESH
-    // Step 22: Write the LPR register for autorefresh of the DDR2 RAM.
-    cr = AT91C_DDRC2_LPCB_SELFREFRESH;
-    #ifdef CONFIG_RAM_SELF_REFRESH_DELAY_64
-        cr |= AT91C_DDRC2_TIMEOUT_64;   // activates low power mode 64 clock cycles after the end of the last transfer
-    #endif
-    #ifdef CONFIG_RAM_SELF_REFRESH_DELAY_128
-        cr |= AT91C_DDRC2_TIMEOUT_128;   // activates low power mode 64 clock cycles after the end of the last transfer
-    #endif
-    #ifdef CONFIG_RAM_SELF_REFRESH_DELAY_EXPERIMENTAL
-        cr |= AT91C_DDRC2_TIMEOUT_Reserved;   // activates low power mode 64 clock cycles after the end of the last transfer
-    #endif
-    #ifdef CONFIG_RAM_FR_SELFREFRESH
-        cr |= AT91C_DDRC2_CLK_FR_SELFREFRESH;
-    #endif
-#endif
-   write_ddramc(base_address, HDDRSDRC2_LPR, cr);
-	udelay(10);
-
-	
-	
-	
 	return 0;
 }
