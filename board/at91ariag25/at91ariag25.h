@@ -124,4 +124,6 @@ extern void at91_spi0_hw_init(void);
 
 extern void at91_mci0_hw_init(void);
 
+extern void set_d7dotik_gpios(void);
+
 #endif /*#ifndef __AT91ARIAG25_H__ */

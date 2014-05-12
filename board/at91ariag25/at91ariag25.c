@@ -26,6 +26,19 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+
+#define PIO_MSP430_READY AT91C_PIN_PC(12)
+#define PIO_MSP430_SLEEP AT91C_PIN_PC(11)
+#define PIO_LED_SW1 AT91C_PIN_PA(27)
+#define PIO_LED_SW2 AT91C_PIN_PA(28)
+#define PIO_RESET_MODEM AT91C_PIN_PC(30)
+#define PIO_ONOFF_MODEM AT91C_PIN_PC(31)
+#define PIO_PWRMON_MODEM AT91C_PIN_PC(29)
+#define PIO_EXT1 AT91C_PIN_PC(18)
+#define PIO_ENABLE_UART AT91C_PIN_PA(3)
+
+
 #include "common.h"
 #include "hardware.h"
 #include "arch/at91_ccfg.h"
@@ -388,3 +401,34 @@ void nandflash_config_buswidth(unsigned char busw)
 	writel(csa, AT91C_BASE_SMC + SMC_CTRL3);
 }
 #endif /* #ifdef CONFIG_NANDFLASH */
+
+void set_d7dotik_gpios(void)
+{
+	/* Device non specific... */
+	const struct pio_desc hw_pio[] = {
+	  {"MSP430_READY",    PIO_MSP430_READY, 0, PIO_DEFAULT, PIO_OUTPUT},
+	  {"MSP430_SLEEP",    PIO_MSP430_SLEEP, 0, PIO_DEFAULT, PIO_OUTPUT},
+	  {"LED_SW1",         PIO_LED_SW1,      0, PIO_DEFAULT, PIO_OUTPUT},
+	  {"LED_SW2",         PIO_LED_SW2,      0, PIO_DEFAULT, PIO_OUTPUT},
+	  {"RESET_MODEM",     PIO_RESET_MODEM,  0, PIO_DEFAULT, PIO_OUTPUT},
+	  {"ONOFF_MODEM",     PIO_ONOFF_MODEM,  0, PIO_DEFAULT, PIO_OUTPUT},
+	  {"PWRMON_MODEM",    PIO_PWRMON_MODEM, 0, PIO_DEFAULT, PIO_INPUT },
+	  {"EXT1",            PIO_EXT1,         0, PIO_DEFAULT, PIO_OUTPUT},
+	  {"ENABLE_UART",     PIO_ENABLE_UART,  0, PIO_DEFAULT, PIO_OUTPUT},
+	};
+
+	/* Configure the PIO controller*/
+	pio_configure(hw_pio);
+
+	/* Set all needed gpios low */
+	pio_set_value(PIO_MSP430_READY, 0);
+	pio_set_value(PIO_MSP430_SLEEP, 0);
+	pio_set_value(PIO_LED_SW1, 0);
+	pio_set_value(PIO_LED_SW2, 0);
+	pio_set_value(PIO_RESET_MODEM, 0);
+	pio_set_value(PIO_ONOFF_MODEM, 0);
+	pio_set_value(PIO_PWRMON_MODEM, 0);
+	pio_set_value(PIO_EXT1, 0);
+	pio_set_value(PIO_ENABLE_UART, 0);
+}
+

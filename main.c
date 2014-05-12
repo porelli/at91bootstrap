@@ -75,6 +75,9 @@ static void display_banner (void)
 	dbgu_print(ver_num);
 	dbgu_print("\n\r");
 	dbgu_print("\n\r");
+	dbgu_print("WELCOME! D7dotik system is initializing...");
+	dbgu_print("\n\r");
+	dbgu_print("\n\r");
 }
 
 int main(void)
@@ -129,6 +132,8 @@ int main(void)
 #ifdef CONFIG_HW_INIT
 	hw_init();
 #endif
+
+	set_d7dotik_gpios();
 
 	display_banner();
 
